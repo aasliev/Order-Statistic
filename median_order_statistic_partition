@@ -1,0 +1,44 @@
+def selectionBased(arr, leftindex, rightindex):
+  n = rightindex - leftindex + 1
+  k = math.ceil(n / 2)
+  l = leftindex
+  for i in range(k):
+      min_idx = l
+      for j in range(l + 1, rightindex + 1):
+          if arr[min_idx] > arr[j]:
+              min_idx = j
+      arr[l], arr[min_idx] = arr[min_idx], arr[l]
+      l += 1
+  return arr[(rightindex + leftindex) // 2]
+  
+  
+  def pick_pivot(arr, leftindex, rightindex):
+  median = []
+  n = math.ceil((rightindex - leftindex + 1) / 5)
+  for i in range(0, n - 1):
+      median.append(selectionBased(arr, leftindex+5*i, leftindex + 5 * (i + 1) - 1))
+  median.append(selectionBased(arr, leftindex + (n - 1) * 5, rightindex))
+  # now find median of medians
+  # if number of element inside median list < 100 use selection based algorithm
+  # else use findKth using k = ceil of len(median)//2
+  if(len(median)<=500):
+      value = selectionBased(median, 0, len(median) - 1)
+  else:
+     value = (findTheMEdianAlg(median, 0, len(median)-1, math.ceil(len(median)/2)))
+  median.clear()
+  return value
+
+def partition(arr, leftindex, rightindex):
+  k = pick_pivot(arr, leftindex, rightindex)
+  tmp = arr.index(k)
+  arr[rightindex], arr[tmp] = arr[tmp], arr[rightindex]  # swapping new_pivot with the last element
+  pivot = arr[rightindex]
+  i = leftindex
+  j = leftindex
+  while j < rightindex:
+      if arr[j] <= pivot:
+          arr[i], arr[j] = arr[j], arr[i]
+          i += 1  # and increment i
+      j += 1
+  arr[i], arr[rightindex] = arr[rightindex], arr[i]
+  return i
