@@ -1,0 +1,70 @@
+def createList(a, raNge, lengthl):
+  # for loop 0 to n, which is the number of elements
+  for index in range(0, lengthl):
+      # picks a number from 1 to N(n)
+      a.append(random.randint(1, raNge))
+
+
+def findTheMEdianAlg(arr, leftindex, rightindex, k):
+  if (rightindex - leftindex + 1 >= k and k > 0):
+
+      pivotindex = partition(arr, leftindex, rightindex)
+      if (pivotindex - leftindex == k - 1):
+          return arr[pivotindex]
+      elif (pivotindex - leftindex >= k):  # k is in first subarray
+          return findTheMEdianAlg(arr, leftindex, pivotindex - 1, k)
+      else:  # k is in first subarray
+          return findTheMEdianAlg(arr, pivotindex + 1, rightindex, k - pivotindex+leftindex - 1)
+  else:
+      return sys.maxsize
+
+
+if __name__ == '__main__':
+  # rangeList is N
+  rangeL = [5000, 8000, 10000]
+  # lengthList is n
+  lengthL = [100, 300, 500, 1000, 2000, 4000]
+  aList = []
+  aList.clear()
+  for lenIndex in range(0, len(lengthL)):
+      for rangeIndex in range(0, len(rangeL)):
+          createList(aList, rangeL[rangeIndex], lengthL[lenIndex])
+          ith = random.randint(1, lengthL[lenIndex] - 1)
+          # this loop will pick 5 "i" randomly from  1 to n
+          #for i in range():
+          print("Using Median Order Statistic-----------------------------------------------------------")
+          print("Looking for ith = ", ith, "\nRange is 0 to N = ", rangeL[rangeIndex],
+                "\nList length is 1 to n = ", lengthL[lenIndex])
+          start = timeit.default_timer() * 1e+6
+          print("ith Smallest(return from findKthSmallest) = ", findTheMEdianAlg(aList, 0, len(aList) - 1, ith))
+          end = timeit.default_timer() * 1e+6
+          print("After sorting we get ith index = ", aList[ith - 1])
+          print("It took approximately ", round(end - start, 2), " Microseconds to find the ", ith,
+                "th element of array.\n")
+
+          # ----------------------------------------------------------------------------------------------
+          print("Using Quick Select-----------------------------------------------------------")
+          print("Looking for ith = ", ith, "\nRange is 0 to N = ", rangeL[rangeIndex],
+                "\nList length is 1 to n = ", lengthL[lenIndex])
+          start = timeit.default_timer() * 1e+6
+          print("ith Smallest(return from findKthSmallest) = ", findTheKth_QuickSelect(aList, 0, len(aList) - 1, ith))
+          end = timeit.default_timer() * 1e+6
+          print("After sorting we get ith index = ", aList[ith - 1])
+          print("It took approximately ", round(end - start, 2), " Microseconds to find the ", ith,
+                "th element of array.\n")
+          # -------------------------------------------------------------------------------------------------
+          print("Using Quick Sort-----------------------------------------------------------")
+          print("Looking for ith = ", ith, "\nRange is 0 to N = ", rangeL[rangeIndex],
+                "\nList length is 1 to n = ", lengthL[lenIndex])
+          start = timeit.default_timer() * 1e+6
+          quicksort(aList, 0, len(aList) - 1)
+          print("ith Smallest(return from findKthSmallest) = ",
+                aList[ith - 1])
+          end = timeit.default_timer() * 1e+6
+          print("After sorting we get ith index = ", aList[ith - 1])
+          print("It took approximately ", round(end - start, 2), " Microseconds to find the ", ith,
+                "th element of array.\n")
+          ith = random.randint(1, lengthL[lenIndex] - 1)
+
+      print("\n\n\n")
+      aList.clear()
