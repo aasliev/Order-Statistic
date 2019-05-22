@@ -9,7 +9,8 @@ In part one we had to implement Order Statistic algorithm and run various array 
 4. Comparing Median Order Statistic, QuickSort and Randomized QuickSort.
 5. Summary 
 
->>> What is Order Statistic?
+> What is Order Statistic?
+
 Suppose we have an array and we want to find how does elements of the array behave. For instance, we want to find if the kth 
 (k in range of number of elements) element is smaller than P(any number). There are multiples ways to find out. 
 a. Sort up to kth element using bubble or selection sort. 
@@ -30,7 +31,7 @@ For the deterministic solution, first we divide the array into n/5 subarrays. Se
 of all medians. Finally, use it as the pivot. After each iteration you will have at least n/4 elements less than the pivot and 
 at most 3n/4 elements greater than pivot.
 
->>> Pseudo Code (Order Statistic)
+> Pseudo Code (Order Statistic)
 
 findKthElement(arr, left, right,k)
 if(right-left+1>=k){ 
@@ -42,7 +43,7 @@ if(right-left+1>=k){
 	if (indexPivot+1<k) //k is inside the right sub-array
 		return findKthElement(arr, indexPivot+1, right, k-indexPivot-1)
 
->>> Results
+> Results
 
 We ran Order Statistics algorithm 5 times for [100, 300, 500, 1000, 2000, 4000] number of elements in a range of [5000, 8000, 10000]. 
 We are using microsecond as a unit of time.
@@ -77,7 +78,7 @@ We are using microsecond as a unit of time.
 4000	11966.05	12943.04	12790.29	12865.97	13341.76
 
 
->>> Summary
+> Summary
 Order Statistic algorithms have best running time for finding the ith element when we have big arrays. 
 From the algorithms that we have above the Randomized QuickSort would be the best to find ith element, 
 however Deterministic Solution (Median Selection Algorithm) would be better to find the median of the array.
