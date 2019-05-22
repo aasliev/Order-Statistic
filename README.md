@@ -79,6 +79,7 @@ We are using microsecond as a unit of time.
 
 
 > Summary
+
 Order Statistic algorithms have best running time for finding the ith element when we have big arrays. 
 From the algorithms that we have above the Randomized QuickSort would be the best to find ith element, 
 however Deterministic Solution (Median Selection Algorithm) would be better to find the median of the array.
