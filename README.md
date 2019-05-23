@@ -32,13 +32,21 @@ at most 3n/4 elements greater than pivot.
 > Pseudo Code (Order Statistic)
 
 findKthElement(arr, left, right,k)
-if(right-left+1>=k){ 
+
+if(right-left+1>=k){
+
 	indexPivot = partition(arr, left, right)
+	
 	if(indexPivot+1==k)
+	
 		return arr[indexPivot]
+		
 	if(indexPivot+1 > k) // k is inside the left subarray
+	
 		return findKthElement(arr,left,indexPivot-1,k)
+		
 	if (indexPivot+1<k) //k is inside the right sub-array
+	
 		return findKthElement(arr, indexPivot+1, right, k-indexPivot-1)
 
 > Summary
